@@ -94,7 +94,6 @@ public class MyFrame extends JFrame
 			{
 				try
 				{
-					@SuppressWarnings("resource")
 					JFileChooser fd = new JFileChooser();
 					fd.setFileSelectionMode(JFileChooser.FILES_ONLY);
 					fd.setMultiSelectionEnabled(true);
@@ -102,12 +101,13 @@ public class MyFrame extends JFrame
 					File[] files = fd.getSelectedFiles();
 					for (File f : files)
 					{
-						Client client = new Client(); // 启动客户端连接
+						 // 启动客户端连接
 						if (f != null)
 						{
 							new Thread(new Runnable()
 							{
 
+								@SuppressWarnings("resource")
 								@Override
 								public void run()
 								{
@@ -115,7 +115,7 @@ public class MyFrame extends JFrame
 									{
 										try
 										{
-											client.sendFile(f, progressBar);
+											new Client().sendFile(f, progressBar);
 										}
 										catch (Exception e)
 										{
